@@ -723,6 +723,51 @@
         }
         .lightbox-close:hover { background: rgba(255,255,255,0.15); }
 
+        /* ===== LEGAL MODAL ===== */
+        .legal-modal {
+            display: none; position: fixed; inset: 0; z-index: 10000;
+            background: rgba(0,0,0,0.92); backdrop-filter: blur(12px);
+            align-items: flex-start; justify-content: center;
+            overflow-y: auto; padding: 48px 24px;
+        }
+        .legal-modal.active { display: flex; }
+        .legal-modal-content {
+            background: var(--bg-card); border: 1px solid rgba(255,255,255,0.08);
+            border-radius: var(--radius-lg); max-width: 720px; width: 100%;
+            padding: 48px; position: relative; margin: auto;
+        }
+        .legal-modal-content h2 {
+            font-size: 28px; font-weight: 700; margin-bottom: 24px;
+            color: var(--white);
+        }
+        .legal-modal-content h3 {
+            font-size: 18px; font-weight: 600; margin: 24px 0 8px;
+            color: var(--green-primary);
+        }
+        .legal-modal-content p, .legal-modal-content li {
+            font-size: 15px; line-height: 1.7; color: var(--gray-300);
+            margin-bottom: 8px;
+        }
+        .legal-modal-content ul { list-style: none; padding: 0; }
+        .legal-modal-content ul li::before {
+            content: ''; display: inline-block; width: 6px; height: 6px;
+            background: var(--green-primary); border-radius: 50%;
+            margin-right: 10px; vertical-align: middle;
+        }
+        .legal-modal-close {
+            position: absolute; top: 16px; right: 16px;
+            background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+            color: var(--white); width: 40px; height: 40px; border-radius: 50%;
+            font-size: 22px; cursor: pointer; display: flex;
+            align-items: center; justify-content: center; transition: var(--transition);
+        }
+        .legal-modal-close:hover { background: rgba(255,255,255,0.15); }
+        @media (max-width: 600px) {
+            .legal-modal { padding: 24px 12px; }
+            .legal-modal-content { padding: 32px 20px; }
+            .legal-modal-content h2 { font-size: 22px; }
+        }
+
         /* ===== RESPONSIVE ===== */
         @media (max-width: 1024px) {
             .features-grid { grid-template-columns: repeat(2, 1fr); }
@@ -999,7 +1044,6 @@
                 </a>
             </div>
             <div class="trust-bar fade-in">
-                <div class="trust-item"><span class="trust-icon">&#9670;</span> Ausgründung aus EOW &amp; savvytec</div>
                 <div class="trust-item"><span class="trust-icon">&#9670;</span> 4 Industriepartner + 5 Forschungsinstitutionen</div>
                 <div class="trust-item"><span class="trust-icon">&#9670;</span> Starker Forschungsfokus ab 2026</div>
             </div>
@@ -1563,16 +1607,16 @@
                 <div class="footer-column">
                     <h4>Rechtliches</h4>
                     <ul>
-                        <li><a href="#">Impressum</a></li>
-                        <li><a href="#">Datenschutzerklärung</a></li>
+                        <li><a href="#" onclick="openModal('impressumModal');return false;">Impressum</a></li>
+                        <li><a href="#" onclick="openModal('datenschutzModal');return false;">Datenschutzerklärung</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2026 Enercept GmbH. Alle Rechte vorbehalten.</p>
                 <div class="footer-bottom-links">
-                    <a href="#">Impressum</a>
-                    <a href="#">Datenschutz</a>
+                    <a href="#" onclick="openModal('impressumModal');return false;">Impressum</a>
+                    <a href="#" onclick="openModal('datenschutzModal');return false;">Datenschutz</a>
                 </div>
             </div>
         </div>
@@ -1639,5 +1683,107 @@
         <button class="lightbox-close" aria-label="Schließen">&times;</button>
         <img src="wimmel.jpg" alt="Enercept Ökosystem – Wimmelbild">
     </div>
+
+    <!-- Impressum Modal -->
+    <div class="legal-modal" id="impressumModal" onclick="if(event.target===this)closeModal(this.id)">
+        <div class="legal-modal-content">
+            <button class="legal-modal-close" onclick="closeModal('impressumModal')" aria-label="Schließen">&times;</button>
+            <h2>Impressum</h2>
+            <h3>Angaben gemäß § 5 TMG</h3>
+            <p>
+                Enercept GmbH<br>
+                Technologiepark 18<br>
+                33100 Paderborn
+            </p>
+            <h3>Vertreten durch die Geschäftsführer</h3>
+            <ul>
+                <li>Frederik Auffenberg</li>
+                <li>Torsten Greif</li>
+                <li>Thomas Hegers</li>
+                <li>Matthias Kopius</li>
+                <li>Daniel Pudelko</li>
+                <li>Thomas Schatton</li>
+            </ul>
+            <h3>Kontakt</h3>
+            <p>E-Mail: kontakt@enercept.de</p>
+            <h3>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h3>
+            <p>
+                Enercept GmbH<br>
+                Technologiepark 18<br>
+                33100 Paderborn
+            </p>
+            <h3>Haftungsausschluss</h3>
+            <p>Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen.</p>
+            <p>Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.</p>
+            <h3>Haftung für Links</h3>
+            <p>Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.</p>
+            <h3>Urheberrecht</h3>
+            <p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.</p>
+        </div>
+    </div>
+
+    <!-- Datenschutz Modal -->
+    <div class="legal-modal" id="datenschutzModal" onclick="if(event.target===this)closeModal(this.id)">
+        <div class="legal-modal-content">
+            <button class="legal-modal-close" onclick="closeModal('datenschutzModal')" aria-label="Schließen">&times;</button>
+            <h2>Datenschutzerklärung</h2>
+            <h3>1. Datenschutz auf einen Blick</h3>
+            <p>Die folgenden Hinweise geben einen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können.</p>
+            <h3>2. Verantwortliche Stelle</h3>
+            <p>
+                Enercept GmbH<br>
+                Technologiepark 18<br>
+                33100 Paderborn<br>
+                E-Mail: kontakt@enercept.de
+            </p>
+            <p>Verantwortliche Stelle ist die natürliche oder juristische Person, die allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten entscheidet.</p>
+            <h3>3. Datenerfassung auf dieser Website</h3>
+            <p><strong>Wer ist verantwortlich für die Datenerfassung auf dieser Website?</strong><br>
+            Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten können Sie dem Impressum dieser Website entnehmen.</p>
+            <p><strong>Wie erfassen wir Ihre Daten?</strong><br>
+            Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen, z.&thinsp;B. durch Eingabe in ein Kontaktformular oder per E-Mail. Andere Daten werden automatisch beim Besuch der Website durch unsere IT-Systeme erfasst. Das sind vor allem technische Daten (z.&thinsp;B. Internetbrowser, Betriebssystem oder Uhrzeit des Seitenaufrufs).</p>
+            <p><strong>Wofür nutzen wir Ihre Daten?</strong><br>
+            Ein Teil der Daten wird erhoben, um eine fehlerfreie Bereitstellung der Website zu gewährleisten. Andere Daten können zur Analyse Ihres Nutzerverhaltens verwendet werden.</p>
+            <h3>4. Hosting</h3>
+            <p>Diese Website wird extern gehostet. Die personenbezogenen Daten, die auf dieser Website erfasst werden, werden auf den Servern des Hosters gespeichert. Hierbei kann es sich v.&thinsp;a. um IP-Adressen, Kontaktanfragen, Meta- und Kommunikationsdaten, Vertragsdaten, Kontaktdaten, Namen, Websitezugriffe und sonstige Daten, die über eine Website generiert werden, handeln.</p>
+            <h3>5. Allgemeine Hinweise und Pflichtinformationen</h3>
+            <p><strong>Datenschutz</strong><br>
+            Die Betreiber dieser Seiten nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend den gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.</p>
+            <p><strong>Hinweis zur verantwortlichen Stelle</strong><br>
+            Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist die im Impressum genannte Stelle.</p>
+            <h3>6. Ihre Rechte</h3>
+            <p>Sie haben jederzeit das Recht, unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten personenbezogenen Daten zu erhalten. Sie haben außerdem das Recht, die Berichtigung oder Löschung dieser Daten zu verlangen. Wenn Sie eine Einwilligung zur Datenverarbeitung erteilt haben, können Sie diese jederzeit widerrufen. Außerdem haben Sie das Recht, unter bestimmten Umständen die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen sowie ein Beschwerderecht bei der zuständigen Aufsichtsbehörde.</p>
+            <p>Hierzu sowie zu weiteren Fragen zum Thema Datenschutz können Sie sich jederzeit an uns wenden.</p>
+            <h3>7. Server-Log-Dateien</h3>
+            <p>Der Provider der Seiten erhebt und speichert automatisch Informationen in sogenannten Server-Log-Dateien, die Ihr Browser automatisch an uns übermittelt. Dies sind:</p>
+            <ul>
+                <li>Browsertyp und Browserversion</li>
+                <li>Verwendetes Betriebssystem</li>
+                <li>Referrer URL</li>
+                <li>Hostname des zugreifenden Rechners</li>
+                <li>Uhrzeit der Serveranfrage</li>
+                <li>IP-Adresse</li>
+            </ul>
+            <p>Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen. Die Erfassung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO.</p>
+        </div>
+    </div>
+
+    <script>
+        function openModal(id) {
+            document.getElementById(id).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.legal-modal.active').forEach(function(m) {
+                    closeModal(m.id);
+                });
+            }
+        });
+    </script>
 </body>
 </html>
